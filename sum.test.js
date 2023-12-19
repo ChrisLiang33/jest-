@@ -43,3 +43,37 @@ test("the data is i love food", (done) => {
   }
   fetchData(callback);
 });
+
+const fetchPromise = require("./fetchPromise");
+test("the data is food", () => {
+  return expect(fetchPromise()).resolves.toBe("food");
+});
+
+// test("the fetch fails with an error", () => {
+//   return expect(fetchPromise()).reject.toThrow("error");
+// });
+
+test("data is food", async () => {
+  const data = await fetchPromise();
+  expect(data).toBe("food");
+});
+
+test("mock implementation of basic function", () => {
+  const mock = jest.fn((x) => 42 + x);
+  expect(mock(1)).toBe(43);
+  expect(mock).toHaveBeenCalledWith(1);
+});
+
+test("spying on a method of an object ", () => {
+  const video = {
+    play() {
+      return true;
+    },
+  };
+
+  const spy = jest.spyOn(video, "play");
+  video.play();
+
+  expect(spy).toHaveBeenCalled();
+  spy.mockRestore();
+});
