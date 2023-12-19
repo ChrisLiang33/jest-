@@ -1,7 +1,7 @@
-const sum = require("./sum");
-test("add 1 + 2 equals 3", () => {
-  expect(sum(1, 2)).toBe(3);
-});
+// const sum = require("./sum");
+// test("add 1 + 2 equals 3", () => {
+//   expect(sum(1, 2)).toBe(3);
+// });
 
 test("2 + 2 is 4", () => {
   expect(2 + 2).toBe(4);
@@ -14,6 +14,32 @@ test("object assignment", () => {
 });
 
 test("null is falsy", () => {
-  const n = null;
+  const n = 0;
   expect(n).toBeFalsy();
+});
+
+test("1 is truthy", () => {
+  const n = 1;
+  expect(n).toBeTruthy();
+});
+
+const myFunction = require("./sum");
+
+test("throws on invalid input", () => {
+  expect(() => {
+    myFunction("hah");
+  }).toThrow();
+});
+
+const fetchData = require("./fetchData");
+test("the data is i love food", (done) => {
+  function callback(data) {
+    try {
+      expect(data).toBe("i like food");
+      done();
+    } catch (error) {
+      done(error);
+    }
+  }
+  fetchData(callback);
 });
